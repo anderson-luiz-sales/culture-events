@@ -3,21 +3,24 @@ spring:
     name: cultere-events
   profiles:
     active: ${ENV:local}
+  datasource:
+    url: jdbc:postgresql://localhost:5432/cultere_events
+    username: admin
+    password: admin
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
 
 server:
   port: ${ENV_PORT:9080}
   servlet:
     context-path: /api
 
-#  datasource:
-#    url: jdbc:postgresql://localhost:5432/postgres
-#    username: postgres
-#    password: postgres
-#    driver-class-name: org.postgresql.Driver
-#  jpa:
-#    hibernate:
-#      ddl-auto: none
-#    show-sql: true
-#    properties:
-#      hibernate:
-#        dialect: org.hibernate.dialect.PostgreSQLDialect
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
