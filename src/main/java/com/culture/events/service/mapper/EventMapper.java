@@ -22,7 +22,7 @@ public class EventMapper {
         return Event.builder()
                 .eventName(eventRequest.getEventName())
                 .description(eventRequest.getDescription())
-                .eventDate(eventRequest.getEventDate())
+                .eventDate(String.valueOf(eventRequest.getEventDate()))
                 .location(eventRequest.getLocation())
                 .category(eventRequest.getCategory())
                 .build();

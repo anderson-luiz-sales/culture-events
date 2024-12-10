@@ -1,9 +1,6 @@
 package com.culture.events.dtos.request;
 
-import com.culture.events.enums.EventCategory;
-import com.culture.events.validiton.ValidEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -11,6 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
 
 @Data
 @Builder(toBuilder = true)
@@ -29,7 +28,7 @@ public class EventRequestDTO {
 
     @Schema(type = "string", description = "Data do Evento", example = "2024-05-10T20:00:00")
     @NotNull(message = "O campo 'eventDate' é obrigatório.")
-    private String eventDate;
+    private LocalDateTime eventDate;
 
     @Schema(type = "string", description = "Local do Evento", example = "Central Park")
     @NotEmpty(message = "O campo 'location' é obrigatório.")
