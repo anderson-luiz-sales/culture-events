@@ -1,13 +1,15 @@
 package com.culture.events;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class EventsApplication {
+@EnableAutoConfiguration
+public class Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(EventsApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 
 }
