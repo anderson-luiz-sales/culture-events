@@ -1,7 +1,6 @@
 package com.culture.events.service;
 
 import com.culture.events.dtos.request.EventRequestDTO;
-import com.culture.events.dtos.request.EventRequestListDTO;
 import com.culture.events.dtos.response.EventResponseDTO;
 import com.culture.events.entities.Event;
 import com.culture.events.exception.EventServiceException;
@@ -14,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-import static com.culture.events.service.mapper.EventMapper.mapToEventList;
+import static com.culture.events.service.mapper.EventMapper.mapToEvent;
 import static com.culture.events.service.mapper.EventMapper.updateEventFromRequest;
 import static com.culture.events.service.mapper.EventResponseDTOMapper.mapToEventResponse;
 import static com.culture.events.service.mapper.EventResponseDTOMapper.mapToEventResponseList;
@@ -33,11 +32,11 @@ public class EventService {
 
     private final EventRepository eventRepository;
 
-    public void createEvent(EventRequestListDTO eventRequestList) {
+    public void createEvent(EventRequestDTO eventRequest) {
         String methodName = "createEvent";
         try {
-            List<Event> eventList = mapToEventList(eventRequestList);
-            eventRepository.saveAll(eventList);
+            Event event = mapToEvent(eventRequest);
+            eventRepository.save(event);
         } catch (Exception e) {
             log.error(ERROR_MESSAGE, EVENT_SERVICE_CREATE_ERROR, e.getMessage(), e);
             throw new EventServiceException(methodName, EVENT_SERVICE_CREATE_ERROR, e.getMessage(), UNPROCESSABLE_ENTITY);

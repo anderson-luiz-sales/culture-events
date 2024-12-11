@@ -1,7 +1,6 @@
 package com.culture.events.service;
 
 import com.culture.events.dtos.request.EventRequestDTO;
-import com.culture.events.dtos.request.EventRequestListDTO;
 import com.culture.events.dtos.response.EventResponseDTO;
 import com.culture.events.entities.Event;
 import com.culture.events.exception.EventServiceException;
@@ -14,10 +13,10 @@ import java.util.List;
 import java.util.Optional;
 
 import static com.culture.events.factory.EventFactory.makeEventFirst;
-import static com.culture.events.factory.EventRequestDTOFactory.makeEventRequestDTOFirst;
+import static com.culture.events.factory.EventRequestDTOFactory.makeEventRequestDTO;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.anyList;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
@@ -42,22 +41,20 @@ class EventServiceTest {
 
     @Test
     void testCreateEvent() {
-        EventRequestListDTO eventRequestList = new EventRequestListDTO();
-        eventRequestList.setEvents(Collections.singletonList(makeEventRequestDTOFirst()));
+        EventRequestDTO eventRequest = new EventRequestDTO();
 
-        eventService.createEvent(eventRequestList);
+        eventService.createEvent(eventRequest);
 
-        verify(eventRepository, times(1)).saveAll(anyList());
+        verify(eventRepository, times(1)).save(any());
     }
 
     @Test
     void testCreateEventShouldThrowEventServiceExceptionWhenRepositoryFails() {
-        EventRequestListDTO eventRequestList = new EventRequestListDTO();
-        eventRequestList.setEvents(Collections.singletonList(makeEventRequestDTOFirst()));
+        EventRequestDTO eventRequest = new EventRequestDTO();
 
-        doThrow(new RuntimeException("Database error")).when(eventRepository).saveAll(anyList());
+        doThrow(new RuntimeException("Database error")).when(eventRepository).save(any());
 
-        EventServiceException exception = assertThrows(EventServiceException.class, () -> eventService.createEvent(eventRequestList));
+        EventServiceException exception = assertThrows(EventServiceException.class, () -> eventService.createEvent(eventRequest));
 
         assertEquals(EVENT_SERVICE_CREATE_ERROR, exception.getMessage());
     }
@@ -94,7 +91,7 @@ class EventServiceTest {
 
 
     @Test
-    void testGetEventById_NotFound() {
+    void testGetEventByIdNotFound() {
         when(eventRepository.findById(EVENT_ID)).thenReturn(Optional.empty());
 
         EventServiceException exception = assertThrows(EventServiceException.class, () -> {
@@ -123,7 +120,7 @@ class EventServiceTest {
 
     @Test
     void testUpdateEventExists() {
-        EventRequestDTO eventRequest = makeEventRequestDTOFirst();
+        EventRequestDTO eventRequest = makeEventRequestDTO();
         Event event = makeEventFirst();
         when(eventRepository.findById(EVENT_ID)).thenReturn(Optional.of(event));
 
@@ -134,8 +131,8 @@ class EventServiceTest {
     }
 
     @Test
-    void testUpdateEvent_NotFound() {
-        EventRequestDTO eventRequest = makeEventRequestDTOFirst();
+    void testUpdateEventNotFound() {
+        EventRequestDTO eventRequest = makeEventRequestDTO();
         when(eventRepository.findById(EVENT_ID)).thenReturn(Optional.empty());
 
         EventServiceException exception = assertThrows(EventServiceException.class, () -> eventService.updateEvent(EVENT_ID, eventRequest));

@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static com.culture.events.factory.EventFactory.makeEventSecond;
 import static com.culture.events.factory.EventFactory.makeEventFirst;
+import static com.culture.events.factory.EventFactory.makeEventSecond;
 import static com.culture.events.factory.EventResponseDTOFactory.makeEventResponseDTO;
 import static com.culture.events.service.mapper.EventResponseDTOMapper.mapToEventResponseList;
 import static org.junit.jupiter.api.Assertions.assertEquals;

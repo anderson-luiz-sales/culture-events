@@ -1,7 +1,6 @@
 package com.culture.events.controller.swagger;
 
 import com.culture.events.dtos.request.EventRequestDTO;
-import com.culture.events.dtos.request.EventRequestListDTO;
 import com.culture.events.dtos.response.EventResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -24,7 +23,7 @@ public interface EventControllerDoc {
             @ApiResponse(responseCode = "201", description = "Evento criado com sucesso."),
             @ApiResponse(responseCode = "400", description = "Requisição inválida.")
     })
-    ResponseEntity<Void> createEvent(@RequestBody EventRequestListDTO eventRequestList);
+    ResponseEntity<Void> createEvent(@RequestBody EventRequestDTO eventRequestList);
 
     @GetMapping
     @Operation(summary = "Obtém todos os eventos", description = "Este endpoint retorna uma lista de todos os eventos.")

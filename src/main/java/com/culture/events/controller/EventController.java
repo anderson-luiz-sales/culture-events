@@ -2,7 +2,6 @@ package com.culture.events.controller;
 
 import com.culture.events.controller.swagger.EventControllerDoc;
 import com.culture.events.dtos.request.EventRequestDTO;
-import com.culture.events.dtos.request.EventRequestListDTO;
 import com.culture.events.dtos.response.EventResponseDTO;
 import com.culture.events.exception.BadRequestMessageException;
 import com.culture.events.service.EventService;
@@ -32,7 +31,7 @@ public class EventController implements EventControllerDoc {
     private final EventService eventService;
 
     @PostMapping
-    public ResponseEntity<Void> createEvent(@Valid @RequestBody EventRequestListDTO eventRequestList) {
+    public ResponseEntity<Void> createEvent(@Valid @RequestBody EventRequestDTO eventRequestList) {
         log.info("Creating events: {}", eventRequestList);
         eventService.createEvent(eventRequestList);
         return ResponseEntity.status(HttpStatus.CREATED).build();

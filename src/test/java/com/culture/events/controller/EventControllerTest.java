@@ -1,7 +1,6 @@
 package com.culture.events.controller;
 
 import com.culture.events.dtos.request.EventRequestDTO;
-import com.culture.events.dtos.request.EventRequestListDTO;
 import com.culture.events.dtos.response.EventResponseDTO;
 import com.culture.events.service.EventService;
 import org.junit.jupiter.api.BeforeEach;
@@ -37,12 +36,12 @@ class EventControllerTest {
 
     @Test
     void testCreateEvent() {
-        EventRequestListDTO eventRequestList = new EventRequestListDTO();
+        EventRequestDTO eventRequestDTO = new EventRequestDTO();
 
-        ResponseEntity<Void> response = eventController.createEvent(eventRequestList);
+        ResponseEntity<Void> response = eventController.createEvent(eventRequestDTO);
 
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
-        verify(eventService, times(1)).createEvent(eventRequestList);
+        verify(eventService, times(1)).createEvent(eventRequestDTO);
     }
 
     @Test
