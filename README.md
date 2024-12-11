@@ -44,7 +44,14 @@ Após a compilação, você pode usar o Docker Compose para construir e executar
 ```bash
 sudo docker-compose up --build
 ```
-### 3. Acessar a API
+
+### 3. Executar para subir a aplicação local:
+Caso queria executar de forma local:
+
+```bash
+docker run --name postgres-container -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=admin -e POSTGRES_DB=cultere_events -p 5432:5432 -d postgres:latest
+```
+### 4. Acessar a API
 A API estará disponível em http://localhost:9080/api. Você pode acessar a documentação da API gerada pelo Swagger em:
 
 ### Swagger
