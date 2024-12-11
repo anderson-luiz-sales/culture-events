@@ -31,9 +31,9 @@ public class EventController implements EventControllerDoc {
     private final EventService eventService;
 
     @PostMapping
-    public ResponseEntity<Void> createEvent(@Valid @RequestBody EventRequestDTO eventRequestList) {
-        log.info("Creating events: {}", eventRequestList);
-        eventService.createEvent(eventRequestList);
+    public ResponseEntity<Void> createEvent(@Valid @RequestBody EventRequestDTO eventRequest) {
+        log.info("Creating events: {}", eventRequest);
+        eventService.createEvent(eventRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
