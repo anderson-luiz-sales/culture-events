@@ -1,8 +1,18 @@
 package com.culture.events.entities;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.time.LocalDateTime;
-import lombok.*;
 
 @Entity
 @Table(name = "events")
@@ -24,7 +34,7 @@ public class Event {
     private String description;
 
     @Column(name = "event_date", nullable = false)
-    private String eventDate;
+    private LocalDateTime eventDate;
 
     @Column(name = "location", nullable = false)
     private String location;

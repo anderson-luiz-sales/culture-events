@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-import static com.culture.events.service.mapper.EventMapper.mapToEvent;
 import static com.culture.events.service.mapper.EventMapper.mapToEventList;
 import static com.culture.events.service.mapper.EventMapper.updateEventFromRequest;
 import static com.culture.events.service.mapper.EventResponseDTOMapper.mapToEventResponse;

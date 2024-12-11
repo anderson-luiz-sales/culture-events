@@ -1,11 +1,11 @@
 package com.culture.events.controller;
 
+import com.culture.events.controller.swagger.EventControllerDoc;
 import com.culture.events.dtos.request.EventRequestDTO;
 import com.culture.events.dtos.request.EventRequestListDTO;
 import com.culture.events.dtos.response.EventResponseDTO;
 import com.culture.events.exception.BadRequestMessageException;
 import com.culture.events.service.EventService;
-import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,12 +27,11 @@ import java.util.List;
 @Slf4j
 @BadRequestMessageException("Bad request")
 @RequiredArgsConstructor
-public class EventController {
+public class EventController implements EventControllerDoc {
 
     private final EventService eventService;
 
     @PostMapping
-    @Operation(summary = "Cria um novo evento", description = "Este endpoint cria um novo evento.")
     public ResponseEntity<Void> createEvent(@Valid @RequestBody EventRequestListDTO eventRequestList) {
         log.info("Creating events: {}", eventRequestList);
         eventService.createEvent(eventRequestList);
@@ -40,7 +39,6 @@ public class EventController {
     }
 
     @GetMapping
-    @Operation(summary = "Obtém todos os eventos", description = "Este endpoint retorna uma lista de todos os eventos.")
     public ResponseEntity<List<EventResponseDTO>> getAllEvents() {
         log.info("Fetching all events");
         List<EventResponseDTO> events = eventService.getAllEvents();
@@ -48,7 +46,6 @@ public class EventController {
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = "Obtém um evento por ID", description = "Este endpoint retorna um evento específico com base no ID.")
     public ResponseEntity<EventResponseDTO> getEventById(@PathVariable Long id) {
         log.info("Fetching event with ID: {}", id);
         EventResponseDTO eventResponse = eventService.getEventById(id);
@@ -56,7 +53,6 @@ public class EventController {
     }
 
     @DeleteMapping("/{id}")
-    @Operation(summary = "Deleta um evento por ID", description = "Este endpoint deleta um evento específico com base no ID.")
     public ResponseEntity<Void> deleteEvent(@PathVariable Long id) {
         log.info("Deleting event with ID: {}", id);
         eventService.deleteEvent(id);
@@ -64,7 +60,6 @@ public class EventController {
     }
 
     @PutMapping("/{id}")
-    @Operation(summary = "Atualiza um evento por ID", description = "Este endpoint atualiza um evento específico com base no ID.")
     public ResponseEntity<EventResponseDTO> updateEvent(@PathVariable Long id, @Valid @RequestBody EventRequestDTO eventRequest) {
         log.info("Updating event with ID: {}", id);
         EventResponseDTO updatedEvent = eventService.updateEvent(id, eventRequest);

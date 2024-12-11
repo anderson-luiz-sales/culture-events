@@ -22,7 +22,7 @@ public class EventMapper {
         return Event.builder()
                 .eventName(eventRequest.getEventName())
                 .description(eventRequest.getDescription())
-                .eventDate(String.valueOf(eventRequest.getEventDate()))
+                .eventDate(eventRequest.getEventDate())
                 .location(eventRequest.getLocation())
                 .category(eventRequest.getCategory())
                 .build();
@@ -31,7 +31,7 @@ public class EventMapper {
     public static void updateEventFromRequest(Event event, EventRequestDTO eventRequest) {
         event.setEventName(eventRequest.getEventName());
         event.setDescription(eventRequest.getDescription());
-        event.setEventDate(String.valueOf(eventRequest.getEventDate()));
+        event.setEventDate(eventRequest.getEventDate());
         event.setLocation(eventRequest.getLocation());
         event.setCategory(eventRequest.getCategory());
     }
